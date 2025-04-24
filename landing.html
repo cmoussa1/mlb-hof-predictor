@@ -22,15 +22,15 @@
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+      max-width: 500px;
       width: 100%;
       text-align: center;
     }
 
-    input[type="text"] {
+    input[type="text"], input[type="number"] {
       width: 100%;
       padding: 0.75rem;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
@@ -44,6 +44,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      margin-top: 1rem;
     }
 
     button:hover {
@@ -60,38 +61,44 @@
 <body>
   <div class="container">
     <h1>MLB hall of fame predictor</h1>
-    <p>enter a player's name to see their HoF probability:</p>
+    <p>enter a player's information to calculate their HoF grade:</p>
 
-    <input type="text" id="playerName" placeholder="e.g. Derek Jeter">
+    <input type="text" id="playerName" placeholder="name">
+    <input type="number" step="0.1" id="oWAR" placeholder="oWAR">
+    <input type="number" step="0.1" id="dWAR" placeholder="dWAR">
+    <input type="number" step="0.001" id="wOBA" placeholder="wOBA">
+    <input type="number" step="1" id="wRCPlus" placeholder="wRC+">
+
     <button onclick="predictHOF()">check probability</button>
 
     <div id="result"></div>
   </div>
 
   <script>
+    const hofDataByPosition = {
+      SS: [
+        { name: "Honus Wagner", hofGrade: 77.86 },
+        { name: "Cal Ripken Jr.", hofGrade: 58.84 },
+        { name: "Arky Vaughan", hofGrade: 54.8 },
+        { name: "Derek Jeter", hofGrade: 53.6 }
+      ]
+    };
+
     function predictHOF() {
       const name = document.getElementById('playerName').value.trim();
+      const oWAR = parseFloat(document.getElementById('oWAR').value);
+      const dWAR = parseFloat(document.getElementById('dWAR').value);
+      const wOBA = parseFloat(document.getElementById('wOBA').value);
+      const wRCPlus = parseFloat(document.getElementById('wRCPlus').value);
       const resultEl = document.getElementById('result');
 
-      if (!name) {
-        resultEl.innerText = 'please enter a player name.';
+      if (!name || isNaN(oWAR) || isNaN(dWAR) || isNaN(wOBA) || isNaN(wRCPlus)) {
+        resultEl.innerText = 'Please enter all fields correctly.';
         return;
       }
 
-      // Dummy data & logic for now — to be replaced with your model
-      const dummyProbabilities = {
-        'Derek Jeter': 0.99,
-        'Barry Bonds': 0.75,
-        'David Ortiz': 0.85
-      };
-
-      const probability = dummyProbabilities[name];
-
-      if (probability !== undefined) {
-        resultEl.innerText = `${name} has a ${(probability * 100).toFixed(1)}% chance of making the HoF`;
-      } else {
-        resultEl.innerText = `no data found for "${name}"`;
-      }
+      const hofGrade = (oWAR * 0.4 + dWAR * 0.3 + wOBA * 0.15 + wRCPlus * 0.15).toFixed(2);
+      resultEl.innerText = `${name} has a HoF Grade of ${hofGrade}. Probability calculation coming soon.`;
     }
   </script>
 </body>
