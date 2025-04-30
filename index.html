@@ -55,6 +55,10 @@
       font-size: 1.2rem;
       color: #333;
     }
+
+    #result p {
+      margin: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
@@ -119,7 +123,7 @@
       const rank = sortedGrades.filter(g => g <= hofGrade).length;
       const percentile = ((rank / sortedGrades.length) * 100).toFixed(2);
       const averageGrade = sortedGrades.reduce((sum, val) => sum + val, 0) / sortedGrades.length;
-      const gradeDiff = (hofGrade - averageGrade).toFixed(2);
+      const gradeDiff = hofGrade - averageGrade;
 
       // determine probability based on percentile and grade difference
       let probability = 0;
@@ -138,11 +142,31 @@
         else if (gradeDiff < -7 && gradeDiff >= -9) probability = 20;
         else if (gradeDiff < -9) probability = 5;
       }
+      resultEl.innerHTML = "";
 
-      resultEl.innerText = `${name} has a HoF Grade of ${hofGrade.toFixed(2)}
-percentile among elected HoF ${position}s: ${percentile}%
-difference from average HoF grade among elected HoF ${position}s: ${gradeDiff}
-estimated probability of election: ${probability}%.`;
+      // Lines to display
+      const lines = [
+        `estimated probability of election: ${probability}%.`,
+        `${name} has a HoF Grade of ${hofGrade.toFixed(2)}.`,
+        `percentile among elected HoF ${position}s: ${percentile}%.`,
+        `difference from average HoF grade among elected HoF ${position}s: ${gradeDiff.toFixed(2)}.`,
+      ];
+
+      // Function to display lines one by one
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          const p = document.createElement("p");
+          p.textContent = line;
+          p.style.opacity = 0;
+          resultEl.appendChild(p);
+
+          // Fade in animation
+          setTimeout(() => {
+            p.style.transition = "opacity 0.6s ease-in";
+            p.style.opacity = 1;
+          }, 50);
+        }, index * 1000); // Delay each line by 1 second
+      });
     }
 
     window.onload = () => {
