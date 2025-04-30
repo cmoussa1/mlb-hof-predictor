@@ -59,9 +59,107 @@
     #result p {
       margin: 0.5rem 0;
     }
+
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      padding: 1rem;
+      transition: left 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #007BFF;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.5rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1100;
+      transition: opacity 0.3s ease;
+    }
+
+    .hamburger.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Overlay to darken background */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 900;
+    }
+
+    /* Active classes */
+    .sidebar.active {
+      left: 0;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body>
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <span>navigation</span>
+      <button class="close-btn" onclick="toggleSidebar()">×</button>
+    </div>
+    <a href="shortstops.html">shortstops</a>
+    <!-- Add more position links -->
+  </div>
+
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
   <div class="container">
     <h1>MLB hall of fame predictor</h1>
     <p>enter a player's information to calculate their HoF grade:</p>
@@ -178,6 +276,23 @@
       loadCSVData('OF', 'of_data.csv');
       loadCSVData('DH', 'dh_data.csv');
     };
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.querySelector('.hamburger');
+      const isActive = sidebar.classList.contains('active');
+
+      if (isActive) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        hamburger.classList.add('hidden');
+      }
+    }
   </script>
 </body>
 </html>

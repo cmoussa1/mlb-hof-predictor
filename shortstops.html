@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>shortstops</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    .header {
+      background-color: #007BFF;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .chart-container {
+      width: 95%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+      max-height: 600px;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin: 1rem auto;
+      text-align: center;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>HoF Grades for Elected Shortstops</h1>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="shortstopChart"></canvas>
+  </div>
+
+  <div style="text-align:center;">
+    <a class="back-link" href="index.html">&larr; Back to Predictor</a>
+  </div>
+
+  <script>
+    async function fetchShortstopData() {
+      try {
+        const response = await fetch('ss_data.csv');
+        const text = await response.text();
+        const lines = text.trim().split('\n').slice(1); // skip header
+        const names = [];
+        const grades = [];
+
+        for (const line of lines) {
+          const columns = line.split(',');
+          const name = columns[0];
+          const hofGrade = parseFloat(columns[15]);
+          if (!isNaN(hofGrade)) {
+            names.push(name);
+            grades.push(hofGrade);
+          }
+        }
+
+        return { names, grades };
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+        return { names: [], grades: [] };
+      }
+    }
+
+    async function renderChart() {
+      const { names, grades } = await fetchShortstopData();
+
+      const ctx = document.getElementById('shortstopChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: names,
+          datasets: [{
+            label: 'HoF Grade',
+            data: grades,
+            backgroundColor: 'rgba(0, 123, 255, 0.7)',
+            borderColor: 'rgba(0, 123, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: { display: true, text: 'HoF Grade' }
+            },
+            y: {
+              ticks: {
+                autoSkip: false,
+                maxRotation: 0,
+                minRotation: 0
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'HoF Grades of Elected Shortstops'
+            }
+          }
+        }
+      });
+    }
+
+    renderChart();
+  </script>
+
+</body>
+</html>
