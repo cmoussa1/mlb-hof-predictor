@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MLB Hall of Fame Predictor</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
       margin: 0;
-      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      background-color: #343a40;
+      color: white;
+      padding-top: 60px;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    .sidebar a {
+      padding: 12px 24px;
+      display: block;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+
+    .sidebar h2 {
+      padding: 0 24px;
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .hamburger {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #007BFF;
+      z-index: 1100;
+    }
+
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .main-content.shifted {
+      margin-left: 250px;
     }
 
     .container {
@@ -54,129 +113,55 @@
       margin-top: 1.5rem;
       font-size: 1.2rem;
       color: #333;
-    }
-
-    #result p {
-      margin: 0.5rem 0;
-    }
-
-    /* Sidebar styles */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: #ffffff;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-      padding: 1rem;
-      transition: left 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar a {
-      text-decoration: none;
-      color: #007BFF;
-      margin: 0.5rem 0;
-      font-size: 1rem;
-    }
-
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
-
-    .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .hamburger {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      font-size: 1.5rem;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 0.5rem 0.8rem;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1100;
-      transition: opacity 0.3s ease;
-    }
-
-    .hamburger.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Overlay to darken background */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-      z-index: 900;
-    }
-
-    /* Active classes */
-    .sidebar.active {
-      left: 0;
-    }
-
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
+      white-space: pre-line;
     }
   </style>
 </head>
 <body>
-  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-  <div id="sidebar" class="sidebar">
-    <div class="sidebar-header">
-      <span>navigation</span>
-      <button class="close-btn" onclick="toggleSidebar()">×</button>
-    </div>
+  <!-- Hamburger icon -->
+  <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Navigation</h2>
+    <a href="index.html">predictor</a>
     <a href="shortstops.html">shortstops</a>
-    <!-- Add more position links -->
+    <a href="#">catchers</a>
+    <a href="#">first basemen</a>
+    <a href="#">second basemen</a>
+    <a href="#">third basemen</a>
+    <a href="#">outfielders</a>
+    <a href="#">designated hitters</a>
   </div>
 
-  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <!-- Main content -->
+  <div class="main-content" id="mainContent">
+    <div class="container">
+      <h1>MLB Hall of Fame Predictor</h1>
+      <p>Enter a player's information to calculate their HoF grade:</p>
 
-  <div class="container">
-    <h1>MLB hall of fame predictor</h1>
-    <p>enter a player's information to calculate their HoF grade:</p>
+      <input type="text" id="playerName" placeholder="Player name">
+      <input type="text" id="position" placeholder="Position ('C', '1B', '2B', '3B', 'SS', 'OF', 'DH')">
+      <input type="number" step="0.1" id="oWAR" placeholder="oWAR">
+      <input type="number" step="0.1" id="dWAR" placeholder="dWAR">
+      <input type="number" step="0.001" id="wOBA" placeholder="wOBA">
+      <input type="number" step="1" id="wRCPlus" placeholder="wRC+">
 
-    <input type="text" id="playerName" placeholder="player name">
-    <input type="text" id="position" placeholder="position ('C', '1B', '2B', '3B', 'SS', or 'OF')">
-    <input type="number" step="0.1" id="oWAR" placeholder="oWAR">
-    <input type="number" step="0.1" id="dWAR" placeholder="dWAR">
-    <input type="number" step="0.001" id="wOBA" placeholder="w/OBA">
-    <input type="number" step="1" id="wRCPlus" placeholder="wRC+">
+      <button onclick="predictHOF()">Check Probability</button>
 
-    <button onclick="predictHOF()">Check Probability</button>
-
-    <div id="result"></div>
+      <div id="result"></div>
+    </div>
   </div>
 
   <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('open');
+      mainContent.classList.toggle('shifted');
+    }
+
     const hofDataByPosition = { 'SS': [], 'C': [], '1B': [], '2B': [], '3B': [], 'OF': [], 'DH': [] };
 
     async function loadCSVData(positionKey, fileName) {
@@ -276,23 +261,6 @@
       loadCSVData('OF', 'of_data.csv');
       loadCSVData('DH', 'dh_data.csv');
     };
-
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.querySelector('.hamburger');
-      const isActive = sidebar.classList.contains('active');
-
-      if (isActive) {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-        hamburger.classList.remove('hidden');
-      } else {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
-        hamburger.classList.add('hidden');
-      }
-    }
   </script>
 </body>
 </html>
