@@ -22,15 +22,34 @@
     <a href="#">outfielders</a>
     <a href="#">designated hitters</a>
   </div>
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Top Ribbon -->
+  <div class="top-ribbon">
+    <div class="top-ribbon-content">
+      <div class="left-group">
+        <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+        <div class="project-title">MLB Hall of Fame Predictor</div>
+      </div>
+      <div class="author-links">
+        <span class="author-name">by Christopher Moussa</span>
+        |
+        <a href="https://github.com/cmoussa1" target="_blank">github</a>
+        |
+        <a href="https://www.instagram.com/christopher.moussa/" target="_blank">instagram</a>
+        |
+        <a href="mailto:christopher.moussa97@gmail.com">email</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Main content -->
   <div class="main-content" id="mainContent">
     <div class="container">
-      <h1>MLB Hall of Fame Predictor</h1>
-      <p>Enter a player's information to calculate their HoF grade:</p>
+      <p>enter a player's information to calculate their HoF grade:</p>
 
-      <input type="text" id="playerName" placeholder="Player name">
-      <input type="text" id="position" placeholder="Position ('C', '1B', '2B', '3B', 'SS', 'OF', 'DH')">
+      <input type="text" id="playerName" placeholder="player name">
+      <input type="text" id="position" placeholder="position ('C', '1B', '2B', '3B', 'SS', 'OF', 'DH')">
       <input type="number" step="0.1" id="oWAR" placeholder="oWAR">
       <input type="number" step="0.1" id="dWAR" placeholder="dWAR">
       <input type="number" step="0.001" id="wOBA" placeholder="wOBA">
@@ -45,9 +64,10 @@
   <script>
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('mainContent');
+      const overlay = document.getElementById('overlay');
+
       sidebar.classList.toggle('open');
-      mainContent.classList.toggle('shifted');
+      overlay.classList.toggle('active');
     }
 
     const hofDataByPosition = { 'SS': [], 'C': [], '1B': [], '2B': [], '3B': [], 'OF': [], 'DH': [] };
@@ -149,6 +169,49 @@
       loadCSVData('OF', 'of_data.csv');
       loadCSVData('DH', 'dh_data.csv');
     };
+
+    window.addEventListener('scroll', handleVisibility);
+    window.addEventListener('load', handleVisibility); // Also check on page load
+
+    function handleVisibility() {
+      const section = document.getElementById('descriptionSection');
+      const triggerPoint = window.innerHeight * 0.8;
+
+      if (section.getBoundingClientRect().top < triggerPoint || window.innerHeight >= document.body.scrollHeight) {
+        section.classList.add('visible');
+      }
+    }
   </script>
+
+  <div class="description-section" id="descriptionSection">
+    <h2>about this project</h2>
+    <p>
+      Baseball lies not only in its timeless traditions but also continuously
+      evolves and improves. The sport's Hall of Fame, a shrine of its
+      most excellent players, managers, and icons in the sport, has remained a
+      cherished, yet complex, tradition. My master's thesis sought to modernize
+      the evaluation process by introducing a data-driven approach that
+      centralizes four advanced statistical metrics: <b>Offensive Wins Above
+        Replacement (oWAR), Defensive Wins Above Replacement (dWAR),
+        Weighted On-Base Average (w/OBA), and Weighted Runs Created Plus
+        (wRC+)</b>. This study challenges conventional notions of Hall of Fame
+      candidacy that have for years relied on outdated and flawed statistics.
+      Through statistical analysis, I look to uncover intriguing insights based
+      on data aggregation of the current body of Hall of Fame position players,
+      build a predictive model for current Hall of Fame candidates, and analyze
+      past elections of rejected Hall of Fame candidates. This research aims to
+      represent a progressive step toward more transparent, inclusive, and
+      data-informed Hall of Fame selection processes for future candidates. By
+      embracing modern statistical analysis and an open discourse about
+      position-specific standards, this research aims to preserve the Hall of
+      Fame's status as a shrine to excellence while at the same time introducing
+      new ways to look at contemporary players and make decisive and objective
+      comparisons to those considered the greatest to ever walk on the field. As
+      the complexities of Hall of Fame induction are navigated, this research
+      hopes to serve as a testament to the enduring spirit of baseball—an
+      endeavor where both numbers and narratives converge to honor those who
+      have left an unforgettable mark on the sport.
+    </p>
+  </div>
 </body>
 </html>
