@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MLB Hall of Fame Predictor</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MLB Hall of Fame Predictor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
 <body>
 
   <!-- Hamburger icon -->
@@ -174,12 +175,17 @@
     window.addEventListener('load', handleVisibility); // Also check on page load
 
     function handleVisibility() {
-      const section = document.getElementById('descriptionSection');
-      const triggerPoint = window.innerHeight * 0.8;
+      const sections = document.querySelectorAll('.description-section');
+      const triggerPoint = window.innerHeight * 0.9;
 
-      if (section.getBoundingClientRect().top < triggerPoint || window.innerHeight >= document.body.scrollHeight) {
-        section.classList.add('visible');
-      }
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        // Check if section is in view OR the page is short enough to show everything
+        if (sectionTop < triggerPoint || document.body.scrollHeight <= window.innerHeight) {
+          section.classList.add('visible');
+        }
+      });
     }
   </script>
 
@@ -211,6 +217,21 @@
       hopes to serve as a testament to the enduring spirit of baseball—an
       endeavor where both numbers and narratives converge to honor those who
       have left an unforgettable mark on the sport.
+    </p>
+  </div>
+
+  <div class="description-section" id="methodologySection">
+    <h2>methodology</h2>
+    <p>
+      The approach for creating the quantifiable measurement for a given Hall of Famer
+      and Hall of Fame candidate is straightforward. The grade <i>G</i> for a player is a sum
+      of products, where each product is career statistic multiplied by a decimal weight
+      that represents its importance in relation to the overall grade. The following
+      equation describes how this project's Hall of Fame grade <i>G</i> is calculated:
+
+      <div class="formula">
+        $$ G = (oWAR \times 0.4) + (dWAR \times 0.3) + (\text{w/OBA} \times 0.15) + (wRC+ \times 0.15) $$
+      </div>
     </p>
   </div>
 </body>
