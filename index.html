@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>MLB Hall of Fame Predictor</title>
     <link rel="stylesheet" href="style.css">
-    <script src="scripts.js" defer></script>
+    <script src="scripts/scripts.js" defer></script>
   </head>
 <body>
 
@@ -154,13 +154,13 @@
     }
 
     window.onload = () => {
-      loadCSVData('SS', 'ss_data.csv');
-      loadCSVData('C', 'c_data.csv');
-      loadCSVData('1B', '1b_data.csv');
-      loadCSVData('2B', '2b_data.csv');
-      loadCSVData('3B', '3b_data.csv');
-      loadCSVData('OF', 'of_data.csv');
-      loadCSVData('DH', 'dh_data.csv');
+      loadCSVData('SS', 'positional_data/ss_data.csv');
+      loadCSVData('C', 'positional_data/c_data.csv');
+      loadCSVData('1B', 'positional_data/1b_data.csv');
+      loadCSVData('2B', 'positional_data/2b_data.csv');
+      loadCSVData('3B', 'positional_data/3b_data.csv');
+      loadCSVData('OF', 'positional_data/of_data.csv');
+      loadCSVData('DH', 'positional_data/dh_data.csv');
     };
 
     window.addEventListener('scroll', handleVisibility);

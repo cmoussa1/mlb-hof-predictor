@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>second basemen</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts.js" defer></script>
-  <script src="renderChart.js" defer></script>
+  <script src="scripts/scripts.js" defer></script>
+  <script src="scripts/renderChart.js" defer></script>
   <script defer>
     window.addEventListener('DOMContentLoaded', () => {
         renderPositionChart({
-        csvPath: '2b_data.csv',
+        csvPath: 'positional_data/2b_data.csv',
         canvasId: 'secondBasemenChart',
         chartTitle: 'HoF Grades of Elected Second Basemen',
         gradeIndex: 15

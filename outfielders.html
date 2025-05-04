@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>outfielders</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts.js" defer></script>
-  <script src="renderChart.js" defer></script>
+  <script src="scripts/scripts.js" defer></script>
+  <script src="scripts/renderChart.js" defer></script>
   <script defer>
     window.addEventListener('DOMContentLoaded', () => {
         renderPositionChart({
-        csvPath: 'of_data.csv',
+        csvPath: 'positional_data/of_data.csv',
         canvasId: 'outfieldersChart',
         chartTitle: 'HoF Grades of Elected Outfielders',
         gradeIndex: 15,

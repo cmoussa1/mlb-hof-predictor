@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>designated hitters</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts.js" defer></script>
-  <script src="renderChart.js" defer></script>
+  <script src="scripts/scripts.js" defer></script>
+  <script src="scripts/renderChart.js" defer></script>
   <script defer>
     window.addEventListener('DOMContentLoaded', () => {
         renderPositionChart({
-        csvPath: 'dh_data.csv',
+        csvPath: 'positional_data/dh_data.csv',
         canvasId: 'dhChart',
         chartTitle: 'HoF Grades of Elected Designated Hitters',
         gradeIndex: 15,

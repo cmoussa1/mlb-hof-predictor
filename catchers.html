@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>catchers</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts.js" defer></script>
-  <script src="renderChart.js" defer></script>
+  <script src="scripts/scripts.js" defer></script>
+  <script src="scripts/renderChart.js" defer></script>
   <script defer>
     window.addEventListener('DOMContentLoaded', () => {
         renderPositionChart({
-        csvPath: 'c_data.csv',
+        csvPath: 'positional_data/c_data.csv',
         canvasId: 'catcherChart',
         chartTitle: 'HoF Grades of Elected Catchers',
         gradeIndex: 15
