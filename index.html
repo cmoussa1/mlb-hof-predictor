@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>MLB Hall of Fame Predictor</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="scripts.js" defer></script>
   </head>
 <body>
 
@@ -15,11 +15,11 @@
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <a href="index.html">predictor</a>
-    <a href="shortstops.html">shortstops</a>
     <a href="catchers.html">catchers</a>
     <a href="first_basemen.html">first basemen</a>
     <a href="second_basemen.html">second basemen</a>
     <a href="third_basemen.html">third basemen</a>
+    <a href="shortstops.html">shortstops</a>
     <a href="outfielders.html">outfielders</a>
     <a href="designated_hitters.html">designated hitters</a>
   </div>
@@ -53,7 +53,7 @@
       <input type="text" id="position" placeholder="position ('C', '1B', '2B', '3B', 'SS', 'OF', 'DH')">
       <input type="number" step="0.1" id="oWAR" placeholder="oWAR">
       <input type="number" step="0.1" id="dWAR" placeholder="dWAR">
-      <input type="number" step="0.001" id="wOBA" placeholder="wOBA">
+      <input type="number" step="0.001" id="wOBA" placeholder="w/OBA">
       <input type="number" step="1" id="wRCPlus" placeholder="wRC+">
 
       <button onclick="predictHOF()">Check Probability</button>
@@ -63,14 +63,6 @@
   </div>
 
   <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('active');
-    }
-
     const hofDataByPosition = { 'SS': [], 'C': [], '1B': [], '2B': [], '3B': [], 'OF': [], 'DH': [] };
 
     async function loadCSVData(positionKey, fileName) {
