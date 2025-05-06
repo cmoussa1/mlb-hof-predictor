@@ -109,5 +109,62 @@
       </div>
     </p>
   </div>
+
+  <div class="description-section" id="statisticsSection">
+    <h2>the statistics</h2>
+    <h3>oWAR</h3>
+    <p>
+      Offensive Wins Above Replacement (oWAR) is a comprehensive measure of a position player's
+      offensive contributions. Wins Above Replacement (WAR) fundamentally quantifies a player's
+      value compared to a hypothetical "replacement" player, accounting for multiple offensive
+      facets of the game. In the context of oWAR, the emphasis is solely on a player's offensive impact,
+      making it a valuable tool for evaluating batting performance. The calculation of oWAR is based on
+      constructing an average value derived from various player performances across the league. This average
+      forms the baseline for comparison - hence, the name, “replacement player.” The oWAR of a player is
+      determined by contrasting their offensive contributions to this league-wide average and calculating
+      the resulting surplus. The higher this surplus, the more above-average a player is compared to the
+      rest of the league. When summed over a player's entire career, it becomes measurable how much more
+      (or less) valuable a player is compared to his counterparts.
+    </p>
+    <h3>dWAR</h3>
+    <p>
+      Defensive Wins Above Replacement (dWAR) is a specialized metric focused solely on quantifying a player's
+      defensive contributions, considering both defensive statistics while also adjusting for the position played.
+      In contrast to oWAR, dWAR zeros in on the player's fielding performance, providing insights into their ability
+      to prevent runs through defensive excellence. But, like oWAR, a vital component of this calculation is the
+      establishment of a “replacement-level” player for defense, which corresponds to a league average. dWAR gauges
+      how much better a player's defensive contributions are compared to a hypothetical replacement player. This
+      statistic also creates a single value that encompasses a number of different defensive measurements which
+      enables a standardized comparison across both different positions and different eras.
+    </p>
+    <h3>w/OBA</h3>
+    <p>
+      Weighted On-Base Average (w/OBA) is an evolved version of the traditional On-Base Percentage (OBP) statistic,
+      introducing a dynamic evaluation of a player's ability to reach base and contribute to their team's offensive
+      performance. Unlike OBP, which treats all methods of reaching base equally, w/OBA assigns different values to
+      each offensive event based on its potential to influence the scoring of runs. The calculation of w/OBA
+      involves assigning distinct weights to various offensive events based on their projected impact on runs scored.
+      For instance, a home run is weighted more heavily than a single, which reflects its capacity to generate a
+      greater number of runs. These weighted values are then aggregated to produce the player's w/OBA, encapsulating
+      their ability to create scoring opportunities. The following formula describes how w/OBA is calculated for a
+      given player, taken from
+      <a href="https://www.mlb.com/glossary/advanced-stats/weighted-on-base-average">Major League Baseball's
+        official glossary</a>:
+      <div class="formula">
+        $$
+        \text{wOBA} = \frac{
+        (\text{uBB}_{\text{f}} \times \text{uBB}) +
+        (\text{HBP}_{\text{f}} \times \text{HBP}) +
+        (1\text{B}_{\text{f}} \times 1\text{B}) +
+        (2\text{B}_{\text{f}} \times 2\text{B}) +
+        (3\text{B}_{\text{f}} \times 3\text{B}) +
+        (\text{HR}_{\text{f}} \times \text{HR})
+        }{
+        (\text{AB} + \text{BB} + \text{SF} + \text{HBP})
+        }
+        $$
+      </div>
+    </p>
+  </div>
 </body>
 </html>
