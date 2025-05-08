@@ -168,6 +168,44 @@
         $$
       </div>
     </p>
+    <p></p>
+    <h3>wRC+</h3>
+    <p>
+      Weighted Runs Created Plus (wRC+), similar to w/OBA, is a comprehensive measure of a player's offensive
+      contributions, quantifying their ability to generate runs through a combination of on-base skills and power
+      hitting. The statistic takes into account both a player's ability to reach base as well as their proficiency
+      in producing extra-base hits, which offers a holistic understanding of their offensive impact.
+    </p>
+    <div class="formula">
+      $$
+      \text{wRC+} = (\frac{
+      (\text{wRAA per PA} + \text{league runs per PA}) +
+      (\text{league runs per PA} - \text{ballpark factor} \times \text{league runs per PA})
+      }{
+      (\text{league wRC per PA})
+      }) \times 100
+      $$
+    </div>
+
+    The formula above, taken from
+    <a href="https://www.mlb.com/glossary/advanced-stats/weighted-runs-created-plus">Major League Baseball's
+      official glossary,</a>
+    describes the process for calculating a player's wRC+. It encapsulates a player's ability to reach base and
+    produce extra-base hits divided by their total opportunities at the plate. What sets wRC+ apart from many
+    other traditional offensive statistics, however, is its normalization, which ensures that the league average
+    is always established at 100. This feature eliminates the influence of external factors, such as the ballpark
+    played in or the historical era, enabling direct comparisons across players and time periods. A ballpark that
+    is notoriously difficult to hit in, like Oracle Park in San Francisco, California, is adjusted in order to
+    measure the same as a ballpark that is very friendly to hitters, like Great American Ballpark, located in
+    Cincinnati, Ohio. The interpretation of wRC+ is also relatively simple to understand. A wRC+ of 150 denotes
+    that the player is performing 50% better than the league average, and any wRC+ below 100 denotes a player
+    who is performing below the league average.<br><br>
+    A statistic like wRC+ is especially useful for this project because we are comparing players from different
+    ballparks and from different time periods. wRC+ introduces an element of normalization that enables the equitable
+    evaluation of players from unequal eras, accounting for the variations in offensive conditions and ballpark
+    dimensions. It does a particularly good job of eliminating external factors, facilitating a balanced assessment
+    of a player's offensive prowess and ensuring that the performance of a player is evaluated within the context of
+    the broader baseball landscape.
   </div>
 </body>
 </html>
