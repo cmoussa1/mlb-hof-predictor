@@ -66,20 +66,6 @@ async function renderPositionChart({ csvPath, canvasId, chartTitle, gradeIndex =
         }
       },
       plugins: {
-        legend: {
-          display: true,
-          labels: {
-            generateLabels: chart => [
-              {
-                text: 'Gold intensity = HoF Grade',
-                fillStyle: 'rgba(212, 175, 55, 0.9)',
-                strokeStyle: 'rgba(212, 175, 55, 1)',
-                lineWidth: 1
-              }
-            ],
-            color: '#ddd'
-          }
-        },
         title: {
           display: true,
           text: chartTitle,
