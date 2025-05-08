@@ -46,13 +46,36 @@ body {
 }
 
 .hamburger {
-  position: fixed;
-  top: 15px;
-  left: 15px;
+  position: relative;
   font-size: 24px;
   cursor: pointer;
   color: #f4f4f4;
   z-index: 1100;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .project-title {
+    font-size: 1rem;
+  }
+
+  .author-links {
+    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-ribbon-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .left-group {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .main-content {
@@ -196,25 +219,30 @@ button:hover {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 0.75rem;
 }
 
 .left-group {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
 }
 
 .project-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #f4f4f4;
+  white-space: nowrap;
 }
 
 .author-links {
-  font-size: 0.95rem;
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  flex-grow: 1;
+  min-width: 200px;
 }
 
 .author-links a {
