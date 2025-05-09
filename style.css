@@ -198,6 +198,9 @@ button:hover {
   font-family: monospace;
   color: #58a6ff;
   margin-top: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .top-ribbon {
