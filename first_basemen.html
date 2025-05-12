@@ -20,21 +20,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- hamburger icon -->
+  <!-- Hamburger icon -->
   <div class="hamburger">&#9776;</div>
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <a href="index.html">predictor</a>
-    <a href="catchers.html">catchers</a>
-    <a href="first_basemen.html">first basemen</a>
-    <a href="second_basemen.html">second basemen</a>
-    <a href="third_basemen.html">third basemen</a>
-    <a href="shortstops.html">shortstops</a>
-    <a href="outfielders.html">outfielders</a>
-    <a href="designated_hitters.html">designated hitters</a>
+    <div class="sidebar-header">
+      <div class="project-title">MLB Hall of Fame Predictor</div>
+      <p>by Christopher Moussa</p>
+      <div class="author-links">
+        <a href="https://github.com/cmoussa1" target="_blank">github</a>
+      </div>
+      <div class="author-links">
+        <a href="https://www.instagram.com/christopher.moussa/" target="_blank">instagram</a>
+      </div>
+      <div class="author-links">
+        <a href="mailto:christopher.moussa97@gmail.com">email</a>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="index.html">predictor</a>
+      <a href="catchers.html">catchers</a>
+      <a href="first_basemen.html">first basemen</a>
+      <a href="second_basemen.html">second basemen</a>
+      <a href="third_basemen.html">third basemen</a>
+      <a href="shortstops.html">shortstops</a>
+      <a href="outfielders.html">outfielders</a>
+      <a href="designated_hitters.html">designated hitters</a>
+    </nav>
   </div>
-  <div id="overlay" class="overlay"></div>
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
   <!-- Main content -->
   <div class="main-content" id="mainContent">

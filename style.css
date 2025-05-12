@@ -14,7 +14,7 @@ body {
 /* Sidebar */
 .sidebar {
   height: 100%;
-  width: 250px;
+  width: 500px;
   position: fixed;
   top: 0;
   left: -250px;
@@ -24,6 +24,25 @@ body {
   transition: 0.3s;
   z-index: 1000;
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #30363d;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sidebar.open .sidebar-header {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-nav {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar a {
@@ -56,26 +75,44 @@ body {
   padding: 0.25rem;
 }
 
-@media (max-width: 600px) {
-  .project-title {
-    font-size: 1rem;
-  }
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #bd9c0b;
+}
 
-  .author-links {
-    font-size: 0.8rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.author-name {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
 
-  .top-ribbon-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.author-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
 
-  .left-group {
-    width: 100%;
-    justify-content: space-between;
-  }
+.author-links a {
+  color: #bd9c0b;
+  text-decoration: none;
+}
+
+.author-links a:hover {
+  /* text-decoration: underline; */
+  text-decoration: none;
+}
+
+.top-ribbon-content {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.left-group {
+  width: 100%;
+  justify-content: space-between;
 }
 
 .main-content {
@@ -203,58 +240,9 @@ button:hover {
   max-width: 100%;
 }
 
-.top-ribbon {
-  width: 100%;
-  background-color: #161b22;
-  color: #f4f4f4;
-  padding: 0.75rem 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-.top-ribbon-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 0.75rem;
-}
-
 .left-group {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
 }
-
-.project-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.author-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  flex-grow: 1;
-  min-width: 200px;
-}
-
-.author-links a {
-  color: #bd9c0b;
-  text-decoration: none;
-}
-
-.author-links a:hover {
-  /* text-decoration: underline; */
-  text-decoration: none;
-}
-
