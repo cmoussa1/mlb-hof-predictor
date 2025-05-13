@@ -9,12 +9,16 @@ body {
   background-color: #0e1117;  /* Dark slate background */
   color: #f4f4f4;             /* Light text */
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* Sidebar */
 .sidebar {
   height: 100%;
-  width: 300px;
   position: fixed;
   top: 0;
   left: -250px;
@@ -24,6 +28,8 @@ body {
   transition: 0.3s;
   z-index: 1000;
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.6);
+  overflow-x: hidden;
+  white-space: nowrap;
 }
 
 .sidebar-header {
@@ -36,6 +42,7 @@ body {
 
 .sidebar.open .sidebar-header {
   opacity: 1;
+  left: 0;
   width: 400px;
   pointer-events: auto;
 }
