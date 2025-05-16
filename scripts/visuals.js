@@ -105,7 +105,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `Grade: ${context.parsed.y.toFixed(2)}`
+                label: context => `${context.parsed.y.toFixed(2)}`
                 }
             }
             }
@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `Grade: ${context.parsed.y.toFixed(2)}`
+                label: context => `${context.parsed.y.toFixed(2)}`
                 }
             }
             }
