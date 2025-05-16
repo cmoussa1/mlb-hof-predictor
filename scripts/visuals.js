@@ -178,3 +178,65 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error('Error loading avg_dwar_by_position.csv:', error);
     }
 }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  await renderAvgwOBAChart();
+});
+
+    async function renderAvgwOBAChart() {
+    try {
+        const response = await fetch('general_data/avg_woba_by_position.csv');
+        const text = await response.text();
+        const [headerLine, dataLine] = text.trim().split('\n');
+
+        const labels = headerLine.split(',');
+        const data = dataLine.split(',').map(val => parseFloat(val));
+
+        const ctx = document.getElementById('avgWOBAByPositionChart').getContext('2d');
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+            label: 'Average w/OBA',
+            data,
+            backgroundColor: '#2be043',
+            borderColor: '#2be043',
+            borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: false,
+                min: 0.30,
+                max: 0.42,
+                ticks: {
+                    stepSize: 0.2
+                },
+                title: { display: true, text: 'average grade' }
+            },
+            x: {
+                title: { display: true, text: 'positional group' }
+            }
+            },
+            plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Average w/OBA by Position'
+            },
+            tooltip: {
+                callbacks: {
+                label: context => `${context.parsed.y.toFixed(3)}`
+                }
+            }
+            }
+        }
+        });
+
+    } catch (error) {
+        console.error('Error loading avg_woba_by_position.csv:', error);
+    }
+}
