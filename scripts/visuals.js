@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 ticks: {
                     stepSize: 5
                 },
-                title: { display: true, text: 'average grade' }
+                title: { display: true, text: 'oWAR' }
             },
             x: {
                 title: { display: true, text: 'positional group' }
@@ -153,7 +153,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 ticks: {
                     stepSize: 10
                 },
-                title: { display: true, text: 'average grade' }
+                title: { display: true, text: 'dWAR' }
             },
             x: {
                 title: { display: true, text: 'positional group' }
@@ -215,7 +215,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 ticks: {
                     stepSize: 0.2
                 },
-                title: { display: true, text: 'average grade' }
+                title: { display: true, text: 'w/OBA' }
             },
             x: {
                 title: { display: true, text: 'positional group' }
