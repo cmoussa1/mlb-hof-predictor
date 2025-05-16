@@ -42,3 +42,8 @@ async function fetchData(csvPath, gradeIndex = 15) {
       return { names: [], grades: [] };
     }
 }
+
+function getGoldByValue(value) {
+    const intensity = Math.min(1, Math.max(0, (value - 35) / 20))
+    return `rgba(255, 215, 0, ${0.4 + 0.6 * intensity})`;
+}

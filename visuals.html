@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>shortstops</title>
+  <meta charset="UTF-8" />
+  <title>Visuals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts/scripts.js" defer></script>
-  <script src="scripts/renderChart.js" defer></script>
-  <script defer>
-    window.addEventListener('DOMContentLoaded', () => {
-        renderPositionChart({
-        csvPath: 'positional_data/ss_data.csv',
-        canvasId: 'shortstopChart',
-        chartTitle: 'HoF Grades of Elected Shortstops',
-        gradeIndex: 15
-        });
-    });
-  </script>
-  <link rel="stylesheet" href="style.css">
+  <script src="scripts/visuals.js" defer></script>
 </head>
 <body>
   <!-- Hamburger icon -->
@@ -52,16 +43,17 @@
   </div>
   <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Main content -->
   <div class="main-content" id="mainContent">
     <div class="header">
-      <h1>HoF Grades for Elected Shortstops</h1>
+      <h1>visuals</h1>
     </div>
 
     <div class="chart-container">
-      <canvas id="shortstopChart"></canvas>
+      <h2>Average HoF Grade by Position</h2>
+      <canvas id="avgGradeByPositionChart"></canvas>
     </div>
-  </div>
 
+    <!-- Add more chart containers here -->
+  </div>
 </body>
 </html>
