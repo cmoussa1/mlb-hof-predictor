@@ -116,3 +116,65 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error('Error loading avg_owar_by_position.csv:', error);
     }
 }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  await renderAvgdWARChart();
+});
+
+    async function renderAvgdWARChart() {
+    try {
+        const response = await fetch('general_data/avg_dwar_by_position.csv');
+        const text = await response.text();
+        const [headerLine, dataLine] = text.trim().split('\n');
+
+        const labels = headerLine.split(',');
+        const data = dataLine.split(',').map(val => parseFloat(val));
+
+        const ctx = document.getElementById('avgDWARByPositionChart').getContext('2d');
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+            label: 'Average dWAR',
+            data,
+            backgroundColor: '#cb2be0',
+            borderColor: '#cb2be0',
+            borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: false,
+                min: -20,
+                max: 20,
+                ticks: {
+                    stepSize: 10
+                },
+                title: { display: true, text: 'average grade' }
+            },
+            x: {
+                title: { display: true, text: 'positional group' }
+            }
+            },
+            plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Average dWAR by Position'
+            },
+            tooltip: {
+                callbacks: {
+                label: context => `Grade: ${context.parsed.y.toFixed(2)}`
+                }
+            }
+            }
+        }
+        });
+
+    } catch (error) {
+        console.error('Error loading avg_dwar_by_position.csv:', error);
+    }
+}
