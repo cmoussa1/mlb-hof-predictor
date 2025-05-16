@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
             y: {
                 beginAtZero: true,
@@ -83,6 +84,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
             y: {
                 beginAtZero: false,
@@ -145,6 +147,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
             y: {
                 beginAtZero: false,
@@ -207,6 +210,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
             y: {
                 beginAtZero: false,
@@ -269,6 +273,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
             y: {
                 beginAtZero: false,

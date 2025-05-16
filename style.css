@@ -254,3 +254,39 @@ button:hover {
   gap: 1rem;
   flex-shrink: 0;
 }
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  height: 500px;
+}
+
+.chart-container--tall {
+  height: auto;
+  min-height: 600px;
+  max-height: none;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    height: 300px;
+    padding: 0 1rem;
+  }
+
+  .chart-container--tall {
+    height: auto;
+    min-height: 500px;
+    padding: 0 1rem;
+  }
+
+  .chart-container--tall canvas {
+    height: auto !important;
+  }
+}

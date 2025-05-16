@@ -38,6 +38,7 @@ async function renderPositionChart({ csvPath, canvasId, chartTitle, gradeIndex =
     options: {
       indexAxis: 'y',
       responsive: true,
+      maintainAspectRatio: false,
       scales: {
         x: {
           beginAtZero: true,
