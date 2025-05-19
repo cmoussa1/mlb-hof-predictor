@@ -27,14 +27,12 @@ html {
   padding-top: 60px;
   transition: 0.3s;
   z-index: 1000;
-  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.6);
   overflow-x: hidden;
   white-space: nowrap;
 }
 
 .sidebar-header {
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid #30363d;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
