@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts/scripts.js" defer></script>
   <script src="scripts/renderChart.js" defer></script>
+  <script src="scripts/loadSidebar.js" defer></script>
   <script defer>
     window.addEventListener('DOMContentLoaded', () => {
         renderPositionChart({
@@ -19,22 +20,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- hamburger icon -->
-  <div class="hamburger">&#9776;</div>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <a href="index.html">predictor</a>
-    <a href="visuals.html">visuals</a>
-    <a href="catchers.html">catchers</a>
-    <a href="first_basemen.html">first basemen</a>
-    <a href="second_basemen.html">second basemen</a>
-    <a href="third_basemen.html">third basemen</a>
-    <a href="shortstops.html">shortstops</a>
-    <a href="outfielders.html">outfielders</a>
-    <a href="designated_hitters.html">designated hitters</a>
-  </div>
-  <div id="overlay" class="overlay"></div>
+  <div id="sidebar-container"></div>
 
   <!-- Main content -->
   <div class="main-content" id="mainContent">
