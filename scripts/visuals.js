@@ -17,36 +17,36 @@ window.addEventListener('DOMContentLoaded', async () => {
         data: {
             labels,
             datasets: [{
-            label: 'Average HoF Grade',
-            data,
-            backgroundColor: data.map(g => getGoldByValue(g)),
-            borderColor: '#bd9c0b',
-            borderWidth: 1
+                label: 'Average HoF Grade',
+                data,
+                backgroundColor: data.map(g => getGoldByValue(g)),
+                borderColor: '#bd9c0b',
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-            y: {
-                beginAtZero: true,
-                title: { display: true, text: 'average grade' }
-            },
-            x: {
-                title: { display: true, text: 'positional group' }
-            }
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'average grade' }
+                },
+                x: {
+                    title: { display: true, text: 'positional group' }
+                }
             },
             plugins: {
-            legend: { display: false },
-            title: {
-                display: true,
-                text: 'Average HoF Grade by Position'
-            },
-            tooltip: {
-                callbacks: {
-                label: context => `Grade: ${context.parsed.y.toFixed(2)}`
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Average HoF Grade by Position'
+                },
+                tooltip: {
+                    callbacks: {
+                    label: context => `Grade: ${context.parsed.y.toFixed(2)}`
+                    }
                 }
-            }
             }
         }
         });
@@ -107,7 +107,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `${context.parsed.y.toFixed(2)}`
+                    label: context => `${context.parsed.y.toFixed(2)}`
                 }
             }
             }
@@ -138,11 +138,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         data: {
             labels,
             datasets: [{
-            label: 'Average dWAR',
-            data,
-            backgroundColor: '#cb2be0',
-            borderColor: '#cb2be0',
-            borderWidth: 1
+                label: 'Average dWAR',
+                data,
+                backgroundColor: '#cb2be0',
+                borderColor: '#cb2be0',
+                borderWidth: 1
             }]
         },
         options: {
@@ -170,7 +170,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `${context.parsed.y.toFixed(2)}`
+                    label: context => `${context.parsed.y.toFixed(2)}`
                 }
             }
             }
@@ -201,11 +201,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         data: {
             labels,
             datasets: [{
-            label: 'Average w/OBA',
-            data,
-            backgroundColor: '#2be043',
-            borderColor: '#2be043',
-            borderWidth: 1
+                label: 'Average w/OBA',
+                data,
+                backgroundColor: '#2be043',
+                borderColor: '#2be043',
+                borderWidth: 1
             }]
         },
         options: {
@@ -233,7 +233,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `${context.parsed.y.toFixed(3)}`
+                    label: context => `${context.parsed.y.toFixed(3)}`
                 }
             }
             }
@@ -264,11 +264,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         data: {
             labels,
             datasets: [{
-            label: 'Average wRC+',
-            data,
-            backgroundColor: '#e03a2b',
-            borderColor: '#e03a2b',
-            borderWidth: 1
+                label: 'Average wRC+',
+                data,
+                backgroundColor: '#e03a2b',
+                borderColor: '#e03a2b',
+                borderWidth: 1
             }]
         },
         options: {
@@ -296,7 +296,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             },
             tooltip: {
                 callbacks: {
-                label: context => `${context.parsed.y.toFixed(3)}`
+                    label: context => `${context.parsed.y.toFixed(3)}`
                 }
             }
             }
