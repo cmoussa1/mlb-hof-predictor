@@ -194,12 +194,11 @@ button:hover {
 
 .description-section {
   width: 100%;
-  max-width: 1000px;
+  max-width: fit-content;
   margin: 4rem auto;
   padding: 2rem;
-  background-color: #161b22;
+  background-color: #0e1117;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease-out, transform 1s ease-out;
