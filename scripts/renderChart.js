@@ -67,6 +67,7 @@ async function renderPositionChart({ csvPath, canvasId, chartTitle, gradeIndex =
         }
       },
       plugins: {
+        legend: { display: false },
         title: {
           display: true,
           text: chartTitle,
