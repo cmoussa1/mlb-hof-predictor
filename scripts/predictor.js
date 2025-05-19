@@ -3,7 +3,7 @@
 const hofDataByPosition = {
     'SS': [], 'C': [], '1B': [], '2B': [], '3B': [], 'OF': [], 'DH': []
 };
-  
+
 async function loadCSVData(positionKey, fileName) {
     try {
       const response = await fetch(fileName);
@@ -20,7 +20,7 @@ async function loadCSVData(positionKey, fileName) {
       console.error(`Failed to load ${fileName}:`, error);
     }
 }
-  
+
 function predictHOF() {
     const name = document.getElementById('playerName').value.trim();
     const position = document.getElementById('position').value.trim().toUpperCase();
@@ -29,17 +29,17 @@ function predictHOF() {
     const wOBA = parseFloat(document.getElementById('wOBA').value);
     const wRCPlus = parseFloat(document.getElementById('wRCPlus').value);
     const resultEl = document.getElementById('result');
-  
+
     if (!name || !position || isNaN(oWAR) || isNaN(dWAR) || isNaN(wOBA) || isNaN(wRCPlus)) {
       resultEl.innerText = 'Please enter all fields correctly, including position.';
       return;
     }
-  
+
     if (!hofDataByPosition[position] || hofDataByPosition[position].length === 0) {
       resultEl.innerText = `No data available for position: ${position}`;
       return;
     }
-  
+
     const hofGrade = (oWAR * 0.4 + dWAR * 0.3 + wOBA * 0.15 + wRCPlus * 0.15);
     const group = hofDataByPosition[position];
     const sortedGrades = group.map(player => player.hofGrade).sort((a, b) => a - b);
@@ -47,7 +47,7 @@ function predictHOF() {
     const percentile = ((rank / sortedGrades.length) * 100).toFixed(2);
     const averageGrade = sortedGrades.reduce((sum, val) => sum + val, 0) / sortedGrades.length;
     const gradeDiff = hofGrade - averageGrade;
-  
+
     let probability = 0;
     if (percentile > 45) {
       if (gradeDiff >= -2) probability = 80;
@@ -64,44 +64,113 @@ function predictHOF() {
       else if (gradeDiff >= -9) probability = 20;
       else probability = 5;
     }
-  
+
     resultEl.innerHTML = "";
-  
+
     const lines = [
       `estimated probability of election: ${probability}%.`,
       `${name} has a HoF Grade of ${hofGrade.toFixed(2)}.`,
       `percentile among elected HoF ${position}s: ${percentile}%.`,
       `difference from average HoF grade among elected HoF ${position}s: ${gradeDiff.toFixed(2)}.`
     ];
-  
+
     lines.forEach((line, index) => {
       setTimeout(() => {
         const p = document.createElement("p");
         p.textContent = line;
         p.style.opacity = 0;
         resultEl.appendChild(p);
-  
+
         setTimeout(() => {
           p.style.transition = "opacity 0.6s ease-in";
           p.style.opacity = 1;
         }, 50);
       }, index * 1000);
     });
+
+    renderCandidateChart(position, hofGrade, name);
 }
-  
+
+
+function renderCandidateChart(position, hofGrade, candidateName) {
+    const group = hofDataByPosition[position];
+    if (!group || group.length === 0) return;
+
+    const sortedGroup = group
+      .map(player => ({ name: player.name, grade: player.hofGrade }))
+      .concat({ name: candidateName, grade: hofGrade })
+      .sort((a, b) => b.grade - a.grade);
+
+    const labels = sortedGroup.map(player => player.name);
+    const data = sortedGroup.map(player => player.grade);
+    const backgroundColors = sortedGroup.map(player =>
+      player.name === candidateName ? '#2ea043' : '#bd9c0b'
+    );
+
+    const canvas = document.getElementById("candidateComparisonChart");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = 100;
+
+    if (window.candidateChart) {
+      window.candidateChart.destroy();
+    }
+
+    window.candidateChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "HoF Grade",
+          data,
+          backgroundColor: backgroundColors,
+          borderColor: backgroundColors,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: `HoF Grade Comparison: ${position}s`
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.x.toFixed(2)}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            title: { display: true, text: "HoF Grade" }
+          },
+          y: {
+            ticks: { autoSkip: false, maxRotation: 0, minRotation: 0 }
+          }
+        }
+      }
+    });
+}
+
+
 function handleVisibility() {
     const sections = document.querySelectorAll('.description-section');
     const triggerPoint = window.innerHeight * 0.9;
-  
+
     sections.forEach(section => {
       const sectionTop = section.getBoundingClientRect().top;
-  
       if (sectionTop < triggerPoint || document.body.scrollHeight <= window.innerHeight) {
         section.classList.add('visible');
       }
     });
 }
-  
+
 window.onload = () => {
     loadCSVData('SS', 'positional_data/ss_data.csv');
     loadCSVData('C', 'positional_data/c_data.csv');
@@ -110,9 +179,7 @@ window.onload = () => {
     loadCSVData('3B', 'positional_data/3b_data.csv');
     loadCSVData('OF', 'positional_data/of_data.csv');
     loadCSVData('DH', 'positional_data/dh_data.csv');
-  
-    handleVisibility(); // initial run
+    handleVisibility();
 };
-  
+
 window.addEventListener('scroll', handleVisibility);
-  

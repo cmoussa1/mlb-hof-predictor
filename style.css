@@ -287,3 +287,13 @@ button:hover {
     height: auto !important;
   }
 }
+
+.chart-canvas {
+  width: 100% !important;
+  max-width: 2000px;
+  width: fit-content;
+  height: auto;
+  min-height: 1500px;
+  max-height: none;
+  margin-top: 2rem;
+}
