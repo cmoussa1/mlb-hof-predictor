@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MLB Hall of Fame Predictor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="scripts/scripts.js" defer></script>
+  <script src="scripts/predictor.js" defer></script>
+  <script src="scripts/loadSidebar.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="sidebar-container"></div>
+
+  <!-- Main content -->
+  <div class="description-section" id="descriptionSection">
+    <h2>about this project</h2>
+    <p>
+      Baseball lies not only in its timeless traditions but also continuously
+      evolves and improves. The sport's Hall of Fame, a shrine of its
+      most excellent players, managers, and icons in the sport, has remained a
+      cherished, yet complex, tradition. My master's thesis sought to modernize
+      the evaluation process by introducing a data-driven approach that
+      centralizes four advanced statistical metrics: <b>Offensive Wins Above
+      Replacement (oWAR), Defensive Wins Above Replacement (dWAR), Weighted On-Base
+      Average (w/OBA), and Weighted Runs Created Plus (wRC+)</b>. This study
+      challenges conventional notions of Hall of Fame candidacy that have for years
+      relied on outdated and flawed statistics. This research aims to represent a more
+      data-informed Hall of Fame selection process for future candidates.
+    </p>
+  </div>
+
+  <div class="description-section" id="methodologySection">
+    <h2>methodology</h2>
+    <p>
+      The approach for creating the quantifiable measurement for a given Hall of Famer
+      and Hall of Fame candidate is straightforward. The grade <i>G</i> for a player is a sum
+      of products, where each product is career statistic multiplied by a decimal weight
+      that represents its importance in relation to the overall grade. The following
+      equation describes how this project's Hall of Fame grade <i>G</i> is calculated:
+
+      <div class="formula">
+        $$ G = (oWAR \times 0.4) + (dWAR \times 0.3) + (\text{w/OBA} \times 0.15) + (wRC+ \times 0.15) $$
+      </div>
+    </p>
+  </div>
+
+  <div class="description-section" id="statisticsSection">
+    <h2>the statistics</h2>
+    <h3>oWAR</h3>
+    <p>
+      Offensive Wins Above Replacement (oWAR) is a comprehensive measure of a position player's
+      offensive contributions. Wins Above Replacement (WAR) fundamentally quantifies a player's
+      value compared to a hypothetical "replacement" player, accounting for multiple offensive
+      facets of the game. In the context of oWAR, the emphasis is solely on a player's offensive impact,
+      making it a valuable tool for evaluating batting performance. The calculation of oWAR is based on
+      constructing an average value derived from various player performances across the league. This average
+      forms the baseline for comparison - hence, the name, “replacement player.” The oWAR of a player is
+      determined by contrasting their offensive contributions to this league-wide average and calculating
+      the resulting surplus. The higher this surplus, the more above-average a player is compared to the
+      rest of the league. When summed over a player's entire career, it becomes measurable how much more
+      (or less) valuable a player is compared to his counterparts.
+    </p>
+    <p></p>
+    <h3>dWAR</h3>
+    <p>
+      Defensive Wins Above Replacement (dWAR) is a specialized metric focused solely on quantifying a player's
+      defensive contributions, considering both defensive statistics while also adjusting for the position played.
+      In contrast to oWAR, dWAR zeros in on the player's fielding performance, providing insights into their ability
+      to prevent runs through defensive excellence. But, like oWAR, a vital component of this calculation is the
+      establishment of a “replacement-level” player for defense, which corresponds to a league average. dWAR gauges
+      how much better a player's defensive contributions are compared to a hypothetical replacement player. This
+      statistic also creates a single value that encompasses a number of different defensive measurements which
+      enables a standardized comparison across both different positions and different eras.
+    </p>
+    <p></p>
+    <h3>w/OBA</h3>
+    <p>
+      Weighted On-Base Average (w/OBA) is an evolved version of the traditional On-Base Percentage (OBP) statistic,
+      introducing a dynamic evaluation of a player's ability to reach base and contribute to their team's offensive
+      performance. Unlike OBP, which treats all methods of reaching base equally, w/OBA assigns different values to
+      each offensive event based on its potential to influence the scoring of runs. The calculation of w/OBA
+      involves assigning distinct weights to various offensive events based on their projected impact on runs scored.
+      For instance, a home run is weighted more heavily than a single, which reflects its capacity to generate a
+      greater number of runs. These weighted values are then aggregated to produce the player's w/OBA, encapsulating
+      their ability to create scoring opportunities. The following formula describes how w/OBA is calculated for a
+      given player, taken from
+      <a href="https://www.mlb.com/glossary/advanced-stats/weighted-on-base-average">Major League Baseball's
+        official glossary</a>:
+      <div class="formula">
+        $$
+        \text{w/OBA} = \frac{
+        (\text{uBB}_{\text{f}} \times \text{uBB}) +
+        (\text{HBP}_{\text{f}} \times \text{HBP}) +
+        (1\text{B}_{\text{f}} \times 1\text{B}) +
+        (2\text{B}_{\text{f}} \times 2\text{B}) +
+        (3\text{B}_{\text{f}} \times 3\text{B}) +
+        (\text{HR}_{\text{f}} \times \text{HR})
+        }{
+        (\text{AB} + \text{BB} + \text{SF} + \text{HBP})
+        }
+        $$
+      </div>
+    </p>
+    <p></p>
+    <h3>wRC+</h3>
+    <p>
+      Weighted Runs Created Plus (wRC+), similar to w/OBA, is a comprehensive measure of a player's offensive
+      contributions, quantifying their ability to generate runs through a combination of on-base skills and power
+      hitting. The statistic takes into account both a player's ability to reach base as well as their proficiency
+      in producing extra-base hits, which offers a holistic understanding of their offensive impact.
+    </p>
+    <div class="formula">
+      $$
+      \text{wRC+} = (\frac{
+      (\text{wRAA per PA} + \text{league runs per PA}) +
+      (\text{league runs per PA} - \text{ballpark factor} \times \text{league runs per PA})
+      }{
+      (\text{league wRC per PA})
+      }) \times 100
+      $$
+    </div>
+    <br>
+    The formula above, taken from
+    <a href="https://www.mlb.com/glossary/advanced-stats/weighted-runs-created-plus">Major League Baseball's
+      official glossary,</a>
+    describes the process for calculating a player's wRC+. It encapsulates a player's ability to reach base and
+    produce extra-base hits divided by their total opportunities at the plate. What sets wRC+ apart from many
+    other traditional offensive statistics, however, is its normalization, which ensures that the league average
+    is always established at 100. This feature eliminates the influence of external factors, such as the ballpark
+    played in or the historical era, enabling direct comparisons across players and time periods. A ballpark that
+    is notoriously difficult to hit in, like Oracle Park in San Francisco, California, is adjusted in order to
+    measure the same as a ballpark that is very friendly to hitters, like Great American Ballpark, located in
+    Cincinnati, Ohio. The interpretation of wRC+ is also relatively simple to understand. A wRC+ of 150 denotes
+    that the player is performing 50% better than the league average, and any wRC+ below 100 denotes a player
+    who is performing below the league average.<br><br>
+    A statistic like wRC+ is especially useful for this model because we are comparing players from different
+    ballparks and from different time periods. wRC+ introduces an element of normalization that enables the equitable
+    evaluation of players from unequal eras, accounting for the variations in offensive conditions and ballpark
+    dimensions. It does a particularly good job of eliminating external factors, facilitating a balanced assessment
+    of a player's offensive prowess and ensuring that the performance of a player is evaluated within the context of
+    the broader baseball landscape.
+  </div>
+</body>
+</html>
