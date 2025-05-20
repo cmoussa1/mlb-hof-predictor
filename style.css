@@ -262,8 +262,10 @@ button:hover {
 
 .chart-container--tall {
   height: auto;
-  min-height: 600px;
+  min-height: 1500px;
   max-height: none;
+  width: fit-content;
+  min-width: 1000px;
 }
 
 .chart-container canvas {
