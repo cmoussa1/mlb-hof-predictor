@@ -283,6 +283,7 @@ button:hover {
     height: auto;
     min-height: 500px;
     padding: 0 1rem;
+    width: fit-content;
   }
 
   .chart-container--tall canvas {
