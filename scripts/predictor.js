@@ -104,7 +104,7 @@ function renderCandidateChart(position, hofGrade, candidateName) {
     const labels = sortedGroup.map(player => player.name);
     const data = sortedGroup.map(player => player.grade);
     const backgroundColors = sortedGroup.map(player =>
-      player.name === candidateName ? '#2ea043' : '#bd9c0b'
+      player.name === candidateName ? '#2e50a0' : '#bd9c0b'
     );
 
     const canvas = document.getElementById("candidateComparisonChart");
@@ -158,6 +158,55 @@ function renderCandidateChart(position, hofGrade, candidateName) {
     });
 }
 
+let candidateData = [];
+
+async function loadCandidates() {
+  try {
+    const response = await fetch('general_data/candidates.csv');
+    const text = await response.text();
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',');
+
+    candidateData = lines.slice(1).map(line => {
+      const cols = line.split(',');
+      return {
+        name: cols[0],
+        position: cols[1],
+        oWAR: parseFloat(cols[2]),
+        dWAR: parseFloat(cols[3]),
+        wOBA: parseFloat(cols[4]),
+        wRCPlus: parseInt(cols[5]),
+      };
+    });
+
+    const select = document.getElementById('candidateSelect');
+    candidateData.forEach(c => {
+      const option = document.createElement('option');
+      option.value = c.name;
+      option.textContent = c.name;
+      select.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Failed to load candidates.csv:', error);
+  }
+}
+
+document.getElementById('candidateSelect').addEventListener('change', (e) => {
+  const selectedName = e.target.value;
+  const selected = candidateData.find(c => c.name === selectedName);
+  if (!selected) return;
+
+  // autofill the form
+  document.getElementById('playerName').value = selected.name;
+  document.getElementById('position').value = selected.position;
+  document.getElementById('oWAR').value = selected.oWAR;
+  document.getElementById('dWAR').value = selected.dWAR;
+  document.getElementById('wOBA').value = selected.wOBA;
+  document.getElementById('wRCPlus').value = selected.wRCPlus;
+
+  predictHOF();
+});
 
 function handleVisibility() {
     const sections = document.querySelectorAll('.description-section');
@@ -172,6 +221,7 @@ function handleVisibility() {
 }
 
 window.onload = () => {
+    loadCandidates();
     loadCSVData('SS', 'positional_data/ss_data.csv');
     loadCSVData('C', 'positional_data/c_data.csv');
     loadCSVData('1B', 'positional_data/1b_data.csv');
