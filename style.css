@@ -313,6 +313,8 @@ select#candidateSelect {
   background-color: #0d1117;
   font-family: 'Inter', sans-serif;
   appearance: none;
+  text-align: center;
+  text-align-last: center;
 
   /* Optional: Keep default arrow but clean up style */
   -webkit-appearance: none;
