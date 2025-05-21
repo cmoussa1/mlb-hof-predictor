@@ -36,14 +36,63 @@
     <h2>methodology</h2>
     <p>
       The approach for creating the quantifiable measurement for a given Hall of Famer
-      and Hall of Fame candidate is straightforward. The grade <i>G</i> for a player is a sum
+      and Hall of Fame candidate is straightforward. The grade \( G \) for a player is a sum
       of products, where each product is career statistic multiplied by a decimal weight
       that represents its importance in relation to the overall grade. The following
-      equation describes how this project's Hall of Fame grade <i>G</i> is calculated:
+      equation describes how this project's Hall of Fame grade \( G \) is calculated:
 
       <div class="formula">
         $$ G = (oWAR \times 0.4) + (dWAR \times 0.3) + (\text{w/OBA} \times 0.15) + (wRC+ \times 0.15) $$
       </div>
+
+      Using the Hall of Fame grade \( G \), two additional calculations
+      are performed to determine the final probability that a given candidate will be successfully
+      elected to the Hall of Fame: the difference \( D \) between the candidate's grade \( G \) 
+      and the average grade \( \mu(G_H) \) of an elected hall of famer at the candidate's respective
+      primary position, and the percentile rank \( P \) of the candidate's grade \( G \) among a sorted
+      list of grades \( G \) for all elected hall of famers at the player's respective position.
+
+      Using these two additional calculations, a probability table is consulted to outline the chances a
+      candidate has of being successfully elected:
+
+      <div class="custom-table-container">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>\( G \geq \mu(G_H) - 2 \)</th>
+              <th>\( G \geq \mu(G_H) - 3 \)</th>
+              <th>\( G \geq \mu(G_H) - 5 \)</th>
+              <th>\( G \geq \mu(G_H) - 7 \)</th>
+              <th>\( G \geq \mu(G_H) - 9 \)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\( \gt \) 45th percentile</td>
+              <td style="color: black; background-color: #ffd666;">\( 80\% \)</td>
+              <td style="color: black; background-color: #ffdf85;">\( 65\% \)</td>
+              <td style="color: black; background-color: #ffe7a4;">\( 50\% \)</td>
+              <td style="color: black; background-color: #ffefc2;">\( 35\% \)</td>
+              <td style="color: black; background-color: #fff7e1;">\( 20\% \)</td>
+            </tr>
+            <tr>
+              <td>\( \leq \) 45th percentile</td>
+              <td style="color: black; background-color: #ffdf85;">\( 65\% \)</td>
+              <td style="color: black; background-color: #ffe7a4;">\( 50\% \)</td>
+              <td style="color: black; background-color: #ffefc2;">\( 35\% \)</td>
+              <td style="color: black; background-color: #fff7e1;">\( 20\% \)</td>
+              <td style="color: black; background-color: #ffff;">\( 5\% \)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      This table attempts to answer two questions: 1) Is the candidate being evaluated at least nine points
+      below, or at around 20% of the average hall of famers' grade at his primary position? and 2) Does the
+      candidate rank among the current list of elected hall of famers at his position in at least the 45th
+      percentile?<br><br>
+      The table above was validated with the voting results of the 2023 Hall of Fame ballot.
     </p>
   </div>
 
@@ -111,7 +160,6 @@
       contributions, quantifying their ability to generate runs through a combination of on-base skills and power
       hitting. The statistic takes into account both a player's ability to reach base as well as their proficiency
       in producing extra-base hits, which offers a holistic understanding of their offensive impact.
-    </p>
     <div class="formula">
       $$
       \text{wRC+} = (\frac{
@@ -142,6 +190,7 @@
     dimensions. It does a particularly good job of eliminating external factors, facilitating a balanced assessment
     of a player's offensive prowess and ensuring that the performance of a player is evaluated within the context of
     the broader baseball landscape.
+    </p>
   </div>
 </body>
 </html>
