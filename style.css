@@ -199,9 +199,6 @@ button:hover {
   padding: 2rem;
   background-color: #0e1117;
   border-radius: 12px;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .description-section.visible {
